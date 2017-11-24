@@ -8,63 +8,64 @@ Created on Mon Sep 25 15:01:21 2017
 #Import libraries needed
 import random
 
-#Create the agent class
-class Agent():                                          #Create the class called Agent
-    def __init__ (self, environment, agents):           #Give each agent attributes for...
+#Create the person class
+class Person():                                         #Create the class called Person
+    def __init__ (self, orchard, people):           #Give each person attributes for...
         self.x = random.randint(0,300)                  #x location (random)
         self.y = random.randint(0,300)                  #y location (random)
-        self.environment = environment                  #environment
-        self.store = 0                                  #Food store
-        self.agents = agents                            #Information about the other agents.
+        self.orchard = orchard                          #orchard
+        self.apples = 0                            #Store of apples
+        self.people = people                            #Information about the other agents.
         
-    def __str__(self):                                  #When an agent is printed, return information about their position and store 
-        return ("At position ( %d , %d ) and has a store value of %d" % (self.x, self.y,self.store))
+    def __str__(self):                                  #When an person is printed, return information about their position and no of apples
+        return ("At position ( %d , %d ) and has %d apples " % (self.x, self.y,self.apples))
     
     def move(self):                                     #Define the move function
-        if self.store < 1000:                           #If they have eaten less than 1000
-            if random.random() < 0.5:
-                self.x = (self.x + 1) % 300             #Create a random motion of 1 space in x 
-            else:
-                self.x = (self.x - 1) % 300
-            if random.random() < 0.5:                   #Create a random motion of 1 space in y 
-                self.y = (self.y + 1) % 300
-            else:
-                self.y = (self.y - 1) % 300
-        else:                                           #If they have eaten more than 1000
+        if self.apples < 100:                           #If they have collected less than 100 apples then they move quicker
             if random.random() < 0.5:
                 self.x = (self.x + 3) % 300             #Create a random motion of 3 spaces in x 
             else:
                 self.x = (self.x - 3) % 300
-            if random.random() < 0.5:                   #Create a random motion of 3 spaces in y
+            if random.random() < 0.5:                   #Create a random motion of 3 spaces in y 
                 self.y = (self.y + 3) % 300
             else:
                 self.y = (self.y - 3) % 300
+        else:                                           #If they have collected more than 100 they move slower
+            if random.random() < 0.5:
+                self.x = (self.x + 1) % 300             #Create a random motion of 1 space in x 
+            else:
+                self.x = (self.x - 1) % 300
+            if random.random() < 0.5:                   #Create a random motion of 1 space in y
+                self.y = (self.y + 1) % 300
+            else:
+                self.y = (self.y - 1) % 300
             
-    def eat(self):                                              #Define the eat function
-        if self.environment[self.y][self.x] > 10:               #When the environment has more than 10
-            self.environment[self.y][self.x] -=10               #Take 10 from the environment
-            self.store += 10                                    #Add 10 to the store
-        else:                                                   #When the environment has less than 10
-            self.store += self.environment[self.x][self.y]      #Add the environment to the store 
-            self.environment[self.y][self.x] == 0               #Make the environment 0
+    def pick_fruit(self):                                       #Define the pick_fruit function
+        if self.orchard[self.y][self.x] > 5:                    #When the tree has more than 5 apples
+            self.orchard[self.y][self.x] -=5                #Take 5 apples from the tree
+            self.apples += 5                                     
+        else:                                                   #When the tree has less than 5 apples
+            self.apples += self.orchard[self.x][self.y]         #Pick all the apples
+            self.orchard[self.y][self.x] == 0               
              
-    def distance_between(self, agents):                         #Calculate the distance between 2 agents
-        return ((self.x - agents.x)**2) + ((self.y - agents.y)**2)**0.5
+    def distance_between(self, people):                         #Calculate the distance between 2 agents
+        return ((self.x - people.x)**2) + ((self.y - people.y)**2)**0.5
     
     def share_with_neighbours(self, neighbourhood):             #Define the share_with_neighbours function
-        for agent in self.agents:                               #For every agent...
-            distance = self.distance_between(agent)             #Calculate the distance between them and the other agents
-            if distance == 0:                                   #If the other agent is themselves...
+        for person in self.people:                              #For every person...
+            distance = self.distance_between(person)            #Calculate the distance between them and the other people
+            if distance == 0:                                   #If the other person is themselves...
                 break                                           #ignore it
             elif distance <= neighbourhood:                     #If the distance is less that the specified neighbourhood
-                average = ((self.store + agent.store)//2)       #Share the store equally between the two agents
-                self.store = average
-                agent.store = average
+                average = ((self.apples + person.apples)//2)    #Share the apples equally between the two people
+                self.apples = average
+                person.apples = average
     
-    def vom (self):                                             #Define the vom function
-         if self.store > 1200:                                  #If the agent has eaten more than 1200
-             self.store -= 400                                  #They reduce their store
-             self.environment[self.y][self.x] += 200            #And give some back to the environment
+    def drop (self):                                            #Define the drop function
+         if self.apples > 140:                                  #If the agent has more than 140 apples
+             apples_dropped = random.randint(20,100)            
+             self.apples -=  apples_dropped                     #They drop between 20 and 100 apples
+             self.orchard[self.y][self.x] += apples_dropped     #And give some back to the environment
              
 
             
