@@ -28,13 +28,14 @@ neighbourhood = 30                                      #Define distance which p
 #Command line arguments
 #Allows model to be run from the command line by specifying the 3 parameters
 sys.argv.extend([num_of_people, num_of_iterations, neighbourhood])
-print ("Model\n Number of people: %s\n Number of iterations: %s\n Neighbourhood size: %s"% (sys.argv[1], sys.argv[2], sys.argv[3])) 
+print ("Model\n Number of people: %s\n Number of iterations: %s\n Neighbourhood size: %s"% 
+       (sys.argv[1], sys.argv[2], sys.argv[3])) 
 
 #Creating the people
 people = []                                                     #Make empty people list       
 for i in range (num_of_people):                                 #For specified number of people
     people.append(agentframework.Person(orchard, people))       #Create an person from the framework and append to the list
-    people[i].setx()
+    people[i].setx()                                            #Use set and get functions to safeguard the x,y variables
     people[i].getx()
     people[i].sety()
     people[i].gety()
@@ -48,6 +49,7 @@ for j in range(num_of_iterations):                          #For every iteration
         people[i].share_with_neighbours(neighbourhood)      #Allow them to share with their neighbours
         people[i].drop()                                    #Cultivate the orchard           
 
+#Write out the csv file and save in same directory
 csvfile = open('out.csv', 'w', newline='')
 writer = csv.writer(csvfile, delimiter=',')
 for row in orchard:
