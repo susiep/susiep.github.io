@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 16 16:01:09 2017
 
-@author: susiephilp
-"""
 #Import libraries needed
 import random
 import sys
@@ -38,6 +34,10 @@ print ("Model\n Number of people: %s\n Number of iterations: %s\n Neighbourhood 
 people = []                                                     #Make empty people list       
 for i in range (num_of_people):                                 #For specified number of people
     people.append(agentframework.Person(orchard, people))       #Create an person from the framework and append to the list
+    people[i].setx()
+    people[i].getx()
+    people[i].sety()
+    people[i].gety()
     
 #Run the model
 for j in range(num_of_iterations):                          #For every iteration
