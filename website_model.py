@@ -44,11 +44,14 @@ people = []                                                     #Make empty peop
 for i in range (num_of_people):                                 #For specified number of people
     people.append(agentframework.Person(orchard, people))       #Create an person from the framework and append to the list
 <<<<<<< HEAD
+<<<<<<< HEAD
     people[i].setx()
     people[i].getx()
     people[i].sety()
     people[i].gety()
 =======
+=======
+>>>>>>> 90bd2bf777a25ba52ace0a448c861d19ed3e4e5a
     
 >>>>>>> 90bd2bf777a25ba52ace0a448c861d19ed3e4e5a
 
@@ -67,7 +70,11 @@ def update(frame_number):                                       #For each update
     matplotlib.pyplot.imshow(orchard)                           #Show the orchard environment
     for i in range(num_of_people):                              #For every person load into animation frame
 <<<<<<< HEAD
+<<<<<<< HEAD
             matplotlib.pyplot.scatter(people[i]._x,people[i]._y, color = 'lightblue')
+=======
+            matplotlib.pyplot.scatter(people[i].x,people[i].y, color = 'lightblue')
+>>>>>>> 90bd2bf777a25ba52ace0a448c861d19ed3e4e5a
 =======
             matplotlib.pyplot.scatter(people[i].x,people[i].y, color = 'lightblue')
 >>>>>>> 90bd2bf777a25ba52ace0a448c861d19ed3e4e5a
