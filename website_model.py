@@ -43,41 +43,26 @@ matplotlib.pyplot.ylim(ymax = 300)                      #Define the size of the 
 people = []                                                     #Make empty people list       
 for i in range (num_of_people):                                 #For specified number of people
     people.append(agentframework.Person(orchard, people))       #Create an person from the framework and append to the list
-<<<<<<< HEAD
-<<<<<<< HEAD
-    people[i].setx()
+    people[i].setx()                                            #Use set and get functions to safeguard the value
     people[i].getx()
     people[i].sety()
     people[i].gety()
-=======
-=======
->>>>>>> 90bd2bf777a25ba52ace0a448c861d19ed3e4e5a
-    
->>>>>>> 90bd2bf777a25ba52ace0a448c861d19ed3e4e5a
 
 #Instructions for every animation frame
-def update(frame_number):                                       #For each update
-    fig.clear()                                                 #Clear the figure
-    matplotlib.pyplot.xlim(xmax = 300)                          #Reset the x axis to 300
-    matplotlib.pyplot.ylim(ymax = 300)                          #Reset the y axis to 300
-    for j in range(num_of_iterations):                          #For every iteration
-        random.shuffle(people, random = None)                   #Shuffle the order the people are processed
-        for i in range (num_of_people):                         #For every person
-            people[i].move()                                    #Move the person
-            people[i].pick_fruit()                               #Make them eat
-            people[i].share_with_neighbours(neighbourhood)      #Allow them to share with their neighbours
-            people[i].drop()                                    #Cultivate the orchard           
-    matplotlib.pyplot.imshow(orchard)                           #Show the orchard environment
-    for i in range(num_of_people):                              #For every person load into animation frame
-<<<<<<< HEAD
-<<<<<<< HEAD
+def update(frame_number):                                           #For each update
+    fig.clear()                                                     #Clear the figure
+    matplotlib.pyplot.xlim(xmax = 300)                              #Reset the x axis to 300
+    matplotlib.pyplot.ylim(ymax = 300)                              #Reset the y axis to 300
+    for j in range(num_of_iterations):                              #For every iteration
+        random.shuffle(people, random = None)                       #Shuffle the order the people are processed
+        for i in range (num_of_people):                             #For every person
+            people[i].move()                                        #Move the person
+            people[i].pick_fruit()                                  #Make them eat
+            people[i].share_with_neighbours(neighbourhood)          #Allow them to share with their neighbours
+            people[i].drop()                                        #Cultivate the orchard           
+    matplotlib.pyplot.imshow(orchard)                               #Show the orchard environment
+    for i in range(num_of_people):                                  #For every person load into animation frame
             matplotlib.pyplot.scatter(people[i]._x,people[i]._y, color = 'lightblue')
-=======
-            matplotlib.pyplot.scatter(people[i].x,people[i].y, color = 'lightblue')
->>>>>>> 90bd2bf777a25ba52ace0a448c861d19ed3e4e5a
-=======
-            matplotlib.pyplot.scatter(people[i].x,people[i].y, color = 'lightblue')
->>>>>>> 90bd2bf777a25ba52ace0a448c861d19ed3e4e5a
 
 #Run the animation
 animation = matplotlib.animation.FuncAnimation(fig, update, interval=1, repeat=False, frames=num_of_iterations)
